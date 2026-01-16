@@ -23,7 +23,7 @@ export default function NoteCard({ note, onClick, onDelete }: NoteCardProps) {
 
   const handleDelete = (e: React.MouseEvent) => {
     e.stopPropagation();
-    if (confirm(`Supprimer la note "${note.title}" ?`)) {
+    if (confirm(`Delete note "${note.title}"?`)) {
       onDelete?.(note.id);
     }
   };
@@ -117,6 +117,7 @@ export default function NoteCard({ note, onClick, onDelete }: NoteCardProps) {
       {/* Delete Button - Moved to end and added z-10 to ensure it's on top */}
       <button
         onClick={handleDelete}
+        aria-label={`Delete note ${note.title}`}
         className="absolute top-4 right-4 w-8 h-8 rounded-xl
                    bg-claude-neutral-100 dark:bg-claude-neutral-800
                    text-claude-neutral-500 dark:text-claude-neutral-400
@@ -125,7 +126,6 @@ export default function NoteCard({ note, onClick, onDelete }: NoteCardProps) {
                    hover:bg-red-100 dark:hover:bg-red-900/30
                    hover:text-red-500 dark:hover:text-red-400
                    flex items-center justify-center z-10"
-        title="Supprimer"
       >
         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />

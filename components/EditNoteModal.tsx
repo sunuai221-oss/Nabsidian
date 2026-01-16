@@ -120,7 +120,8 @@ export default function EditNoteModal({ note, folders, onClose, onSave }: EditNo
             </h2>
             <button
               onClick={onClose}
-              className="p-2 rounded-xl hover:bg-claude-neutral-100 dark:hover:bg-claude-neutral-800 
+              aria-label="Close modal"
+              className="p-2 rounded-xl hover:bg-claude-neutral-100 dark:hover:bg-claude-neutral-800
                          text-claude-neutral-500 transition-colors"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -140,8 +141,9 @@ export default function EditNoteModal({ note, folders, onClose, onSave }: EditNo
 
           {/* Title */}
           <div>
-            <label className="block text-sm font-medium mb-2 text-claude-neutral-700 dark:text-claude-neutral-300">Title</label>
+            <label htmlFor="edit-note-title" className="block text-sm font-medium mb-2 text-claude-neutral-700 dark:text-claude-neutral-300">Title</label>
             <input
+              id="edit-note-title"
               type="text"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
@@ -155,8 +157,9 @@ export default function EditNoteModal({ note, folders, onClose, onSave }: EditNo
 
           {/* Type */}
           <div>
-            <label className="block text-sm font-medium mb-2 text-claude-neutral-700 dark:text-claude-neutral-300">Type</label>
+            <label htmlFor="edit-note-type" className="block text-sm font-medium mb-2 text-claude-neutral-700 dark:text-claude-neutral-300">Type</label>
             <select
+              id="edit-note-type"
               value={type}
               onChange={(e) => setType(e.target.value as NoteType)}
               className="w-full px-4 py-3 rounded-xl border border-claude-neutral-200 dark:border-claude-neutral-700
@@ -174,10 +177,11 @@ export default function EditNoteModal({ note, folders, onClose, onSave }: EditNo
 
           {/* Content */}
           <div>
-            <label className="block text-sm font-medium mb-2 text-claude-neutral-700 dark:text-claude-neutral-300">
+            <label htmlFor="edit-note-content" className="block text-sm font-medium mb-2 text-claude-neutral-700 dark:text-claude-neutral-300">
               {type === 'link' ? 'URL' : 'Content'}
             </label>
             <textarea
+              id="edit-note-content"
               value={content}
               onChange={(e) => setContent(e.target.value)}
               required
@@ -193,8 +197,9 @@ export default function EditNoteModal({ note, folders, onClose, onSave }: EditNo
           {/* Folder */}
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium mb-2 text-claude-neutral-700 dark:text-claude-neutral-300">Folder</label>
+              <label htmlFor="edit-note-folder" className="block text-sm font-medium mb-2 text-claude-neutral-700 dark:text-claude-neutral-300">Folder</label>
               <select
+                id="edit-note-folder"
                 value={folder}
                 onChange={(e) => setFolder(e.target.value)}
                 className="w-full px-4 py-3 rounded-xl border border-claude-neutral-200 dark:border-claude-neutral-700
@@ -211,8 +216,9 @@ export default function EditNoteModal({ note, folders, onClose, onSave }: EditNo
               </select>
             </div>
             <div>
-              <label className="block text-sm font-medium mb-2 text-claude-neutral-700 dark:text-claude-neutral-300">New Folder</label>
+              <label htmlFor="edit-note-new-folder" className="block text-sm font-medium mb-2 text-claude-neutral-700 dark:text-claude-neutral-300">New Folder</label>
               <input
+                id="edit-note-new-folder"
                 type="text"
                 value={newFolder}
                 onChange={(e) => setNewFolder(e.target.value)}
@@ -227,8 +233,9 @@ export default function EditNoteModal({ note, folders, onClose, onSave }: EditNo
 
           {/* Tags */}
           <div>
-            <label className="block text-sm font-medium mb-2 text-claude-neutral-700 dark:text-claude-neutral-300">Tags (comma separated)</label>
+            <label htmlFor="edit-note-tags" className="block text-sm font-medium mb-2 text-claude-neutral-700 dark:text-claude-neutral-300">Tags (comma separated)</label>
             <input
+              id="edit-note-tags"
               type="text"
               value={tags}
               onChange={(e) => setTags(e.target.value)}
@@ -242,7 +249,7 @@ export default function EditNoteModal({ note, folders, onClose, onSave }: EditNo
 
           {/* Image */}
           <div>
-            <label className="block text-sm font-medium mb-2 text-claude-neutral-700 dark:text-claude-neutral-300">Image (optional)</label>
+            <label htmlFor="edit-note-image" className="block text-sm font-medium mb-2 text-claude-neutral-700 dark:text-claude-neutral-300">Image (optional)</label>
             {imagePreview ? (
               <div className="relative rounded-xl overflow-hidden">
                 <img
@@ -253,6 +260,7 @@ export default function EditNoteModal({ note, folders, onClose, onSave }: EditNo
                 <button
                   type="button"
                   onClick={removeImage}
+                  aria-label="Remove image"
                   className="absolute top-3 right-3 p-2 bg-red-500 hover:bg-red-600 text-white rounded-xl
                              transition-colors shadow-lg"
                 >
@@ -262,11 +270,12 @@ export default function EditNoteModal({ note, folders, onClose, onSave }: EditNo
                 </button>
               </div>
             ) : (
-              <label className="flex flex-col items-center justify-center p-8 border-2 border-dashed 
+              <label htmlFor="edit-note-image" className="flex flex-col items-center justify-center p-8 border-2 border-dashed
                                 border-claude-neutral-300 dark:border-claude-neutral-700 rounded-xl
                                 hover:border-claude-terracotta dark:hover:border-claude-terracotta
                                 transition-colors cursor-pointer">
                 <input
+                  id="edit-note-image"
                   type="file"
                   accept="image/*"
                   onChange={handleImageChange}
