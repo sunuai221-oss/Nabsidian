@@ -78,11 +78,11 @@ export default function Home() {
           details = data?.error ? `\n${data.error}` : '';
         } catch { }
         console.error('Delete note failed', { noteId, status: res.status });
-        alert(`Erreur lors de la suppression de la note${details}`);
+        alert(`Error deleting note${details}`);
       }
     } catch (error) {
       console.error('Error deleting note:', error);
-      alert('Erreur lors de la suppression de la note');
+      alert('Error deleting note');
     } finally {
       setLoadingNoteId(null);
     }
@@ -169,7 +169,7 @@ export default function Home() {
                   Nabsidian
                 </h1>
                 <p className="text-claude-neutral-500 dark:text-claude-neutral-400 mt-1">
-                  {notes.length} note{notes.length !== 1 ? 's' : ''} • {folders.length} dossier{folders.length !== 1 ? 's' : ''}
+                  {notes.length} note{notes.length !== 1 ? 's' : ''} • {folders.length} folder{folders.length !== 1 ? 's' : ''}
                 </p>
               </div>
               <button
@@ -183,13 +183,13 @@ export default function Home() {
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
                 </svg>
-                Nouvelle note
+                New Note
               </button>
             </div>
             <SearchBar
               value={searchQuery}
               onChange={setSearchQuery}
-              placeholder="Rechercher dans vos notes..."
+              placeholder="Search your notes..."
             />
           </header>
 
@@ -204,19 +204,19 @@ export default function Home() {
               {searchQuery ? (
                 <div>
                   <p className="text-xl font-medium text-claude-neutral-700 dark:text-claude-neutral-300 mb-2">
-                    Aucune note trouvée
+                    No notes found
                   </p>
                   <p className="text-claude-neutral-500 dark:text-claude-neutral-400">
-                    Aucun résultat pour "{searchQuery}"
+                    No results for "{searchQuery}"
                   </p>
                 </div>
               ) : (
                 <div>
                   <p className="text-xl font-medium text-claude-neutral-700 dark:text-claude-neutral-300 mb-2">
-                    Aucune note pour le moment
+                    No notes yet
                   </p>
                   <p className="text-claude-neutral-500 dark:text-claude-neutral-400 mb-6">
-                    Créez votre première note pour commencer
+                    Create your first note to get started
                   </p>
                   <button
                     onClick={() => setShowNewNoteModal(true)}
@@ -225,7 +225,7 @@ export default function Home() {
                                text-claude-neutral-700 dark:text-claude-neutral-300
                                rounded-xl font-medium transition-all duration-200"
                   >
-                    Créer une note
+                    Create a note
                   </button>
                 </div>
               )}
@@ -305,7 +305,7 @@ function NewNoteModal({ onClose, onSave, folders }: NewNoteModalProps) {
     if (!file) return;
 
     if (file.size > 2 * 1024 * 1024) {
-      alert('L\'image ne doit pas dépasser 2 Mo');
+      alert('Image must not exceed 2 MB');
       return;
     }
 
@@ -371,7 +371,7 @@ function NewNoteModal({ onClose, onSave, folders }: NewNoteModalProps) {
         <div className="sticky top-0 bg-white dark:bg-claude-neutral-900 px-6 py-5 border-b border-claude-neutral-200 dark:border-claude-neutral-800">
           <div className="flex items-center justify-between">
             <h2 className="text-xl font-bold text-claude-neutral-900 dark:text-claude-neutral-50">
-              Nouvelle note
+              New Note
             </h2>
             <button
               onClick={onClose}
@@ -389,7 +389,7 @@ function NewNoteModal({ onClose, onSave, folders }: NewNoteModalProps) {
         <form onSubmit={handleSubmit} className="p-6 space-y-5">
           {/* Title */}
           <div>
-            <label className="block text-sm font-medium mb-2 text-claude-neutral-700 dark:text-claude-neutral-300">Titre</label>
+            <label className="block text-sm font-medium mb-2 text-claude-neutral-700 dark:text-claude-neutral-300">Title</label>
             <input
               type="text"
               value={title}
@@ -414,24 +414,24 @@ function NewNoteModal({ onClose, onSave, folders }: NewNoteModalProps) {
                          transition-all duration-200"
             >
               <option value="markdown">📝 Markdown</option>
-              <option value="link">🔗 Lien (YouTube, Twitter, etc.)</option>
+              <option value="link">🔗 Link (YouTube, Twitter, etc.)</option>
               <option value="code">💻 Code</option>
               <option value="xml">📋 XML</option>
-              <option value="file">📁 Fichier</option>
+              <option value="file">📁 File</option>
             </select>
           </div>
 
           {/* Content */}
           <div>
             <label className="block text-sm font-medium mb-2 text-claude-neutral-700 dark:text-claude-neutral-300">
-              {type === 'link' ? 'URL' : 'Contenu'}
+              {type === 'link' ? 'URL' : 'Content'}
             </label>
             <textarea
               value={content}
               onChange={(e) => setContent(e.target.value)}
               required
               rows={6}
-              placeholder={type === 'link' ? 'https://...' : 'Entrez votre contenu...'}
+              placeholder={type === 'link' ? 'https://...' : 'Enter your content...'}
               className="w-full px-4 py-3 rounded-xl border border-claude-neutral-200 dark:border-claude-neutral-700
                          bg-white dark:bg-claude-neutral-800 text-claude-neutral-900 dark:text-claude-neutral-50
                          focus:outline-none focus:border-claude-terracotta focus:ring-2 focus:ring-claude-terracotta/20
@@ -442,7 +442,7 @@ function NewNoteModal({ onClose, onSave, folders }: NewNoteModalProps) {
           {/* Folder */}
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium mb-2 text-claude-neutral-700 dark:text-claude-neutral-300">Dossier</label>
+              <label className="block text-sm font-medium mb-2 text-claude-neutral-700 dark:text-claude-neutral-300">Folder</label>
               <select
                 value={folder}
                 onChange={(e) => setFolder(e.target.value)}
@@ -451,7 +451,7 @@ function NewNoteModal({ onClose, onSave, folders }: NewNoteModalProps) {
                            focus:outline-none focus:border-claude-terracotta focus:ring-2 focus:ring-claude-terracotta/20
                            transition-all duration-200"
               >
-                <option value="">-- Sélectionner --</option>
+                <option value="">-- Select --</option>
                 {folders.map((f) => (
                   <option key={f.path} value={f.path}>
                     {f.name}
@@ -460,12 +460,12 @@ function NewNoteModal({ onClose, onSave, folders }: NewNoteModalProps) {
               </select>
             </div>
             <div>
-              <label className="block text-sm font-medium mb-2 text-claude-neutral-700 dark:text-claude-neutral-300">Nouveau dossier</label>
+              <label className="block text-sm font-medium mb-2 text-claude-neutral-700 dark:text-claude-neutral-300">New Folder</label>
               <input
                 type="text"
                 value={newFolder}
                 onChange={(e) => setNewFolder(e.target.value)}
-                placeholder="Nom du dossier..."
+                placeholder="Folder name..."
                 className="w-full px-4 py-3 rounded-xl border border-claude-neutral-200 dark:border-claude-neutral-700
                            bg-white dark:bg-claude-neutral-800 text-claude-neutral-900 dark:text-claude-neutral-50
                            focus:outline-none focus:border-claude-terracotta focus:ring-2 focus:ring-claude-terracotta/20
@@ -476,7 +476,7 @@ function NewNoteModal({ onClose, onSave, folders }: NewNoteModalProps) {
 
           {/* Tags */}
           <div>
-            <label className="block text-sm font-medium mb-2 text-claude-neutral-700 dark:text-claude-neutral-300">Tags (séparés par des virgules)</label>
+            <label className="block text-sm font-medium mb-2 text-claude-neutral-700 dark:text-claude-neutral-300">Tags (comma separated)</label>
             <input
               type="text"
               value={tags}
@@ -491,12 +491,12 @@ function NewNoteModal({ onClose, onSave, folders }: NewNoteModalProps) {
 
           {/* Image */}
           <div>
-            <label className="block text-sm font-medium mb-2 text-claude-neutral-700 dark:text-claude-neutral-300">Image (optionnel)</label>
+            <label className="block text-sm font-medium mb-2 text-claude-neutral-700 dark:text-claude-neutral-300">Image (optional)</label>
             {imagePreview ? (
               <div className="relative rounded-xl overflow-hidden">
                 <img
                   src={imagePreview}
-                  alt="Aperçu"
+                  alt="Preview"
                   className="w-full max-h-48 object-cover"
                 />
                 <button
@@ -524,7 +524,7 @@ function NewNoteModal({ onClose, onSave, folders }: NewNoteModalProps) {
                 <svg className="w-10 h-10 text-claude-neutral-400 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
                 </svg>
-                <span className="text-sm text-claude-neutral-500">Cliquez pour ajouter une image (max 2 Mo)</span>
+                <span className="text-sm text-claude-neutral-500">Click to add an image (max 2 MB)</span>
               </label>
             )}
           </div>
@@ -538,7 +538,7 @@ function NewNoteModal({ onClose, onSave, folders }: NewNoteModalProps) {
                          text-white rounded-xl font-medium transition-all duration-200
                          shadow-sm hover:shadow-md hover:shadow-claude-terracotta/20"
             >
-              Créer
+              Create
             </button>
             <button
               type="button"
@@ -548,7 +548,7 @@ function NewNoteModal({ onClose, onSave, folders }: NewNoteModalProps) {
                          text-claude-neutral-700 dark:text-claude-neutral-300
                          rounded-xl font-medium transition-all duration-200"
             >
-              Annuler
+              Cancel
             </button>
           </div>
         </form>

@@ -27,7 +27,7 @@ export default function EditNoteModal({ note, folders, onClose, onSave }: EditNo
     if (!file) return;
 
     if (file.size > 2 * 1024 * 1024) {
-      alert('L\'image ne doit pas dépasser 2 Mo');
+      alert('Image must not exceed 2 MB');
       return;
     }
 
@@ -83,7 +83,7 @@ export default function EditNoteModal({ note, folders, onClose, onSave }: EditNo
 
       if (!res.ok) {
         const data = await res.json();
-        throw new Error(data.error || 'Erreur lors de la mise à jour');
+        throw new Error(data.error || 'Error updating note');
       }
 
       const data = await res.json();
@@ -96,7 +96,7 @@ export default function EditNoteModal({ note, folders, onClose, onSave }: EditNo
       onSave(updatedNote);
     } catch (err) {
       console.error('Error updating note:', err);
-      setError(err instanceof Error ? err.message : 'Erreur lors de la mise à jour de la note');
+      setError(err instanceof Error ? err.message : 'Error updating note');
     } finally {
       setIsSubmitting(false);
     }
@@ -116,7 +116,7 @@ export default function EditNoteModal({ note, folders, onClose, onSave }: EditNo
         <div className="sticky top-0 bg-white dark:bg-claude-neutral-900 px-6 py-5 border-b border-claude-neutral-200 dark:border-claude-neutral-800">
           <div className="flex items-center justify-between">
             <h2 className="text-xl font-bold text-claude-neutral-900 dark:text-claude-neutral-50">
-              Modifier la note
+              Edit Note
             </h2>
             <button
               onClick={onClose}
@@ -140,7 +140,7 @@ export default function EditNoteModal({ note, folders, onClose, onSave }: EditNo
 
           {/* Title */}
           <div>
-            <label className="block text-sm font-medium mb-2 text-claude-neutral-700 dark:text-claude-neutral-300">Titre</label>
+            <label className="block text-sm font-medium mb-2 text-claude-neutral-700 dark:text-claude-neutral-300">Title</label>
             <input
               type="text"
               value={title}
@@ -165,24 +165,24 @@ export default function EditNoteModal({ note, folders, onClose, onSave }: EditNo
                          transition-all duration-200"
             >
               <option value="markdown">📝 Markdown</option>
-              <option value="link">🔗 Lien (YouTube, Twitter, etc.)</option>
+              <option value="link">🔗 Link (YouTube, Twitter, etc.)</option>
               <option value="code">💻 Code</option>
               <option value="xml">📋 XML</option>
-              <option value="file">📁 Fichier</option>
+              <option value="file">📁 File</option>
             </select>
           </div>
 
           {/* Content */}
           <div>
             <label className="block text-sm font-medium mb-2 text-claude-neutral-700 dark:text-claude-neutral-300">
-              {type === 'link' ? 'URL' : 'Contenu'}
+              {type === 'link' ? 'URL' : 'Content'}
             </label>
             <textarea
               value={content}
               onChange={(e) => setContent(e.target.value)}
               required
               rows={8}
-              placeholder={type === 'link' ? 'https://...' : type === 'xml' ? '<?xml version="1.0"?>...' : 'Entrez votre contenu...'}
+              placeholder={type === 'link' ? 'https://...' : type === 'xml' ? '<?xml version="1.0"?>...' : 'Enter your content...'}
               className="w-full px-4 py-3 rounded-xl border border-claude-neutral-200 dark:border-claude-neutral-700
                          bg-white dark:bg-claude-neutral-800 text-claude-neutral-900 dark:text-claude-neutral-50
                          focus:outline-none focus:border-claude-terracotta focus:ring-2 focus:ring-claude-terracotta/20
@@ -193,7 +193,7 @@ export default function EditNoteModal({ note, folders, onClose, onSave }: EditNo
           {/* Folder */}
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium mb-2 text-claude-neutral-700 dark:text-claude-neutral-300">Dossier</label>
+              <label className="block text-sm font-medium mb-2 text-claude-neutral-700 dark:text-claude-neutral-300">Folder</label>
               <select
                 value={folder}
                 onChange={(e) => setFolder(e.target.value)}
@@ -202,7 +202,7 @@ export default function EditNoteModal({ note, folders, onClose, onSave }: EditNo
                            focus:outline-none focus:border-claude-terracotta focus:ring-2 focus:ring-claude-terracotta/20
                            transition-all duration-200"
               >
-                <option value="">-- Sélectionner --</option>
+                <option value="">-- Select --</option>
                 {folders.map((f) => (
                   <option key={f.path} value={f.path}>
                     {f.name}
@@ -211,12 +211,12 @@ export default function EditNoteModal({ note, folders, onClose, onSave }: EditNo
               </select>
             </div>
             <div>
-              <label className="block text-sm font-medium mb-2 text-claude-neutral-700 dark:text-claude-neutral-300">Nouveau dossier</label>
+              <label className="block text-sm font-medium mb-2 text-claude-neutral-700 dark:text-claude-neutral-300">New Folder</label>
               <input
                 type="text"
                 value={newFolder}
                 onChange={(e) => setNewFolder(e.target.value)}
-                placeholder="Nom du dossier..."
+                placeholder="Folder name..."
                 className="w-full px-4 py-3 rounded-xl border border-claude-neutral-200 dark:border-claude-neutral-700
                            bg-white dark:bg-claude-neutral-800 text-claude-neutral-900 dark:text-claude-neutral-50
                            focus:outline-none focus:border-claude-terracotta focus:ring-2 focus:ring-claude-terracotta/20
@@ -227,7 +227,7 @@ export default function EditNoteModal({ note, folders, onClose, onSave }: EditNo
 
           {/* Tags */}
           <div>
-            <label className="block text-sm font-medium mb-2 text-claude-neutral-700 dark:text-claude-neutral-300">Tags (séparés par des virgules)</label>
+            <label className="block text-sm font-medium mb-2 text-claude-neutral-700 dark:text-claude-neutral-300">Tags (comma separated)</label>
             <input
               type="text"
               value={tags}
@@ -242,12 +242,12 @@ export default function EditNoteModal({ note, folders, onClose, onSave }: EditNo
 
           {/* Image */}
           <div>
-            <label className="block text-sm font-medium mb-2 text-claude-neutral-700 dark:text-claude-neutral-300">Image (optionnel)</label>
+            <label className="block text-sm font-medium mb-2 text-claude-neutral-700 dark:text-claude-neutral-300">Image (optional)</label>
             {imagePreview ? (
               <div className="relative rounded-xl overflow-hidden">
                 <img
                   src={imagePreview}
-                  alt="Aperçu"
+                  alt="Preview"
                   className="w-full max-h-48 object-cover"
                 />
                 <button
@@ -275,7 +275,7 @@ export default function EditNoteModal({ note, folders, onClose, onSave }: EditNo
                 <svg className="w-10 h-10 text-claude-neutral-400 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
                 </svg>
-                <span className="text-sm text-claude-neutral-500">Cliquez pour ajouter une image (max 2 Mo)</span>
+                <span className="text-sm text-claude-neutral-500">Click to add an image (max 2 MB)</span>
               </label>
             )}
           </div>
@@ -291,7 +291,7 @@ export default function EditNoteModal({ note, folders, onClose, onSave }: EditNo
                          disabled:opacity-50 disabled:cursor-not-allowed
                          shadow-sm hover:shadow-md hover:shadow-claude-terracotta/20"
             >
-              {isSubmitting ? 'Enregistrement...' : 'Enregistrer'}
+              {isSubmitting ? 'Saving...' : 'Save'}
             </button>
             <button
               type="button"
@@ -303,7 +303,7 @@ export default function EditNoteModal({ note, folders, onClose, onSave }: EditNo
                          rounded-xl font-medium transition-all duration-200
                          disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              Annuler
+              Cancel
             </button>
           </div>
         </form>

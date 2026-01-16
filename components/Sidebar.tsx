@@ -22,7 +22,7 @@ export default function Sidebar({ folders, currentFolder, onFolderSelect, onFold
   const confirmDelete = async () => {
     if (!folderToDelete) return;
     if (folderToDelete.noteCount > 0) {
-      alert("Impossible de supprimer un dossier non vide. Supprime d'abord les notes.");
+      alert("Cannot delete a non-empty folder. Delete the notes first.");
       return;
     }
 
@@ -39,11 +39,11 @@ export default function Sidebar({ folders, currentFolder, onFolderSelect, onFold
         onFolderDelete?.(folderToDelete.path);
       } else {
         const data = await res.json();
-        alert(data.error || 'Erreur lors de la suppression du dossier');
+        alert(data.error || 'Error deleting folder');
       }
     } catch (error) {
       console.error('Error deleting folder:', error);
-      alert('Erreur lors de la suppression du dossier');
+      alert('Error deleting folder');
     } finally {
       setIsDeleting(false);
       setFolderToDelete(null);
@@ -59,7 +59,7 @@ export default function Sidebar({ folders, currentFolder, onFolderSelect, onFold
             <svg className="w-5 h-5 text-claude-terracotta" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z" />
             </svg>
-            Dossiers
+            Folders
           </h2>
         </div>
 
@@ -76,7 +76,7 @@ export default function Sidebar({ folders, currentFolder, onFolderSelect, onFold
             <svg className={`w-5 h-5 flex-shrink-0 ${currentFolder === null ? 'text-white' : 'text-claude-terracotta'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
             </svg>
-            <span className="font-medium">Toutes les notes</span>
+            <span className="font-medium">All Notes</span>
           </button>
 
           {/* Folder Items */}
@@ -108,7 +108,7 @@ export default function Sidebar({ folders, currentFolder, onFolderSelect, onFold
                     ? 'hover:bg-white/20 text-white'
                     : 'hover:bg-red-100 dark:hover:bg-red-900/30 text-red-500 dark:text-red-400'
                     }`}
-                  title="Supprimer le dossier"
+                  title="Delete folder"
                 >
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
@@ -137,25 +137,25 @@ export default function Sidebar({ folders, currentFolder, onFolderSelect, onFold
                 </svg>
               </div>
               <h3 className="text-lg font-semibold text-claude-neutral-900 dark:text-claude-neutral-50">
-                Supprimer le dossier
+                Delete Folder
               </h3>
             </div>
 
             <p className="mb-4 text-claude-neutral-600 dark:text-claude-neutral-400">
-              Êtes-vous sûr de vouloir supprimer <strong className="text-claude-neutral-900 dark:text-claude-neutral-100">"{folderToDelete.name}"</strong> ?
+              Are you sure you want to delete <strong className="text-claude-neutral-900 dark:text-claude-neutral-100">"{folderToDelete.name}"</strong>?
             </p>
 
             {folderToDelete.noteCount > 0 && (
               <div className="mb-4 p-4 bg-red-50 dark:bg-red-900/20 rounded-xl border border-red-200 dark:border-red-800">
                 <p className="text-sm text-red-700 dark:text-red-300">
-                  <strong>Impossible :</strong> ce dossier contient <strong>{folderToDelete.noteCount}</strong> note{folderToDelete.noteCount > 1 ? 's' : ''}.
-                  Supprimez ou déplacez les notes d'abord.
+                  <strong>Cannot delete:</strong> this folder contains <strong>{folderToDelete.noteCount}</strong> note{folderToDelete.noteCount > 1 ? 's' : ''}.
+                  Delete or move the notes first.
                 </p>
               </div>
             )}
 
             <p className="mb-6 text-sm text-claude-neutral-500">
-              Cette action est irréversible.
+              This action is irreversible.
             </p>
 
             <div className="flex gap-3">
@@ -166,7 +166,7 @@ export default function Sidebar({ folders, currentFolder, onFolderSelect, onFold
                            transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed
                            disabled:hover:bg-red-500 shadow-sm hover:shadow-md"
               >
-                {isDeleting ? 'Suppression...' : folderToDelete.noteCount > 0 ? 'Dossier non vide' : 'Supprimer'}
+                {isDeleting ? 'Deleting...' : folderToDelete.noteCount > 0 ? 'Folder not empty' : 'Delete'}
               </button>
               <button
                 onClick={() => setFolderToDelete(null)}
@@ -175,7 +175,7 @@ export default function Sidebar({ folders, currentFolder, onFolderSelect, onFold
                            rounded-xl font-medium transition-all duration-200 hover:bg-claude-neutral-200 dark:hover:bg-claude-neutral-700
                            disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                Annuler
+                Cancel
               </button>
             </div>
           </div>

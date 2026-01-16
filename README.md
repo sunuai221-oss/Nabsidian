@@ -1,17 +1,17 @@
 # Nabsidian
 
-Application personnelle de gestion de notes multi-formats avec recherche et organisation.
+Personal multi-format note management application with search and organization capabilities.
 
-## Fonctionnalités
+## Features
 
-- 📝 Support multi-formats (Markdown, liens, code, fichiers)
-- 🔍 Recherche globale dans toutes les notes
-- 📁 Organisation par dossiers
-- 🏷️ Système de tags
-- 🎬 Aperçu YouTube intégré
-- 🐦 Aperçu Twitter/X intégré
-- 🌙 Dark mode automatique
-- ⚡ Interface minimaliste et efficace
+- 📝 Multi-format support (Markdown, links, code, files)
+- 🔍 Global search across all notes
+- 📁 Folder-based organization
+- 🏷️ Tag system
+- 🎬 Integrated YouTube preview
+- 🐦 Integrated Twitter/X preview
+- 🌙 Automatic dark mode
+- ⚡ Minimalist and efficient interface
 
 ## Installation
 
@@ -20,47 +20,47 @@ cd nabsidian
 npm install
 ```
 
-## Démarrage
+## Getting Started
 
 ```bash
 npm run dev
 ```
 
-L'application sera accessible sur `http://localhost:3000`
+The application will be accessible at `http://localhost:3000`
 
 ## Structure
 
 ```
 nabsidian/
-├── app/              # Pages Next.js
+├── app/              # Next.js pages
 │   ├── api/          # API routes
-│   └── page.tsx      # Page principale
-├── components/       # Composants React
-├── lib/              # Utilitaires et types
-└── data/             # Stockage des notes (JSON)
+│   └── page.tsx      # Main page
+├── components/       # React components
+├── lib/              # Utilities and types
+└── data/             # Note storage (JSON)
     ├── security/
     ├── prompts/
     └── dev/
 ```
 
-## Utilisation
+## Usage
 
-1. Cliquez sur "+ Nouvelle note" pour créer une note
-2. Sélectionnez le type (Markdown, Lien, Code, Fichier)
-3. Choisissez un dossier existant ou créez-en un nouveau
-4. Ajoutez des tags pour mieux organiser
-5. Utilisez la barre de recherche pour retrouver vos notes
+1. Click on "+ New Note" to create a note
+2. Select the type (Markdown, Link, Code, File)
+3. Choose an existing folder or create a new one
+4. Add tags for better organization
+5. Use the search bar to find your notes
 
-## Types de notes supportés
+## Supported Note Types
 
-- **Markdown** : Notes texte avec formatage
-- **Lien** : URLs avec aperçu (YouTube, Twitter, sites web)
-- **Code** : Snippets de code avec coloration
-- **Fichier** : Références vers des fichiers locaux
+- **Markdown**: Text notes with formatting
+- **Link**: URLs with preview (YouTube, Twitter, websites)
+- **Code**: Code snippets with syntax highlighting
+- **File**: References to local files
 
 ## Technologies
 
 - Next.js 14 (App Router)
 - TypeScript
 - Tailwind CSS
-- Stockage fichier (JSON)
+- File-based storage (JSON)

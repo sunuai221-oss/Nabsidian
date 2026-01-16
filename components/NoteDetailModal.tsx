@@ -26,7 +26,7 @@ export default function NoteDetailModal({ note, onClose, onDelete, onEdit, isLoa
   const config = typeConfig[note.type] || typeConfig.default;
 
   const handleDelete = () => {
-    if (confirm(`Supprimer la note "${note.title}" ?`)) {
+    if (confirm(`Delete note "${note.title}"?`)) {
       onDelete?.(note.id);
       onClose();
     }
@@ -88,7 +88,7 @@ export default function NoteDetailModal({ note, onClose, onDelete, onEdit, isLoa
             {isLoadingFullContent && (
               <div className="mb-6 flex items-center gap-3 text-claude-neutral-500">
                 <div className="w-5 h-5 border-2 border-claude-terracotta border-t-transparent rounded-full animate-spin" />
-                <span>Chargement du contenu complet...</span>
+                <span>Loading full content...</span>
               </div>
             )}
 
@@ -165,7 +165,7 @@ export default function NoteDetailModal({ note, onClose, onDelete, onEdit, isLoa
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
               </svg>
-              Supprimer
+              Delete
             </button>
             <div className="flex gap-3">
               <button
@@ -178,7 +178,7 @@ export default function NoteDetailModal({ note, onClose, onDelete, onEdit, isLoa
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                 </svg>
-                Modifier
+                Edit
               </button>
               <button
                 onClick={onClose}
@@ -187,7 +187,7 @@ export default function NoteDetailModal({ note, onClose, onDelete, onEdit, isLoa
                            text-claude-neutral-700 dark:text-claude-neutral-300
                            rounded-xl font-medium transition-all duration-200"
               >
-                Fermer
+                Close
               </button>
             </div>
           </div>
